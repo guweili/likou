@@ -7,8 +7,8 @@
 
 def coroutine(func):
     def primer(*args, **kwargs):
-        gen = func(*args, **kwargs)
-        next(gen)
+        gen = func(*args, **kwargs)  # 返回生成器
+        next(gen)  # 激活生成器
         return gen
 
     return primer
