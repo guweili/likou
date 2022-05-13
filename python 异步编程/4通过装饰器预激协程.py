@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# @FileName  : 3.5 通过装饰器预激协程.py
+# @FileName  : 4通过装饰器预激协程.py
 # @Time      : 2022/5/12 14:56
 # @Author    : weilig
+from functools import wraps
 
 
 def coroutine(func):
+    @wraps(func)  # wraps包装: 被包装函数会保留自己的属性
     def primer(*args, **kwargs):
         gen = func(*args, **kwargs)  # 返回生成器
         next(gen)  # 激活生成器
@@ -19,6 +21,7 @@ def averager2():
     total = 0.0
     count = 0
     average = None
+    print('协程已激活，yield处等待下一步的指令')
     while True:
         term = yield average
         print('通过send传入参数', term)

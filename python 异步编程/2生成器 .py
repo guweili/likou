@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# @FileName  : 2 生成器 .py
+# @FileName  : 2生成器 .py
 # @Time      : 2022/5/12 13:48
 # @Author    : weilig
 '''

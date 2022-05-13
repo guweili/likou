@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# @FileName  : 3 yield   send方法.py
+# @FileName  : 3yieldSend方法.py
 # @Time      : 2022/5/12 13:21
 # @Author    : weilig
 '''

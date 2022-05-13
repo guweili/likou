@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# @FileName  : 1 可迭代对象 迭代器.py
+# @FileName  : 1可迭代对象 迭代器.py
 # @Time      : 2022/5/12 13:33
 # @Author    : weilig
 '''
