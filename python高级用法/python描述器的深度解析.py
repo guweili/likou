@@ -397,7 +397,7 @@ class Property:
             raise AttributeError('unreadable attribute')
         self.fset(instance, value)
 
-    def __del__(self, instance):
+    def __delete__(self, instance):
         if self.fdel is None:
             raise AttributeError('unreadable attribute')
         self.fdel(instance)
@@ -432,5 +432,5 @@ class S:
 s = S()
 # s.s = 2
 print(s.s)
-# del s.s
+del s.s
 print(s.__dict__)

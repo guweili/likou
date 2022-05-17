@@ -81,7 +81,4 @@ while True:
         do something
     release GIL
     /* Give Operating System a chance to do thread scheduling */
-    
-    
-    
 '''
