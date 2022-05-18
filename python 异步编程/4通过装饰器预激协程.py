@@ -39,6 +39,8 @@ print(coro_avg.send(30))
 print(coro_avg.send(50))
 
 '''
+协程已激活，yield处等待下一步的指令
+GEN_SUSPENDED
 通过send传入参数 10
 10.0
 通过send传入参数 30

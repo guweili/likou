@@ -6,11 +6,12 @@
 from functools import wraps
 from inspect import getgeneratorstate
 
-
 '''
 通过yield转变为yield from的简单机制
 
 '''
+
+
 class DemoException(Exception):
     """异常示例"""
 
@@ -46,5 +47,17 @@ a.send(20)  # received:  20
 print(a.throw(DemoException))  # It's DemoException.Go on... 666 throw返回值为下一个yield右侧的值
 # print(a.throw(ZeroDivisionError))  # The End!.  传入未处理异常,直接整个程序向上冒泡至结束
 print(getgeneratorstate(a))  # GEN_SUSPENDED
-a.close()  # The End!
+a.close()
+'''
+    生成器源码，通过throw方法传递GeneratorExit异常,如果没有此异常的处理，将直接结束协程
+    def close(self):
+        """Raise GeneratorExit inside generator.
+        """
+        try:
+            self.throw(GeneratorExit)
+        except (GeneratorExit, StopIteration):
+            pass
+        else:
+            raise RuntimeError("generator ignored GeneratorExit")
+'''
 print(getgeneratorstate(a))  # GEN_CLOSED

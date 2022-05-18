@@ -4,9 +4,11 @@
 # @Time      : 2022/5/13 11:10
 # @Author    : weilig
 '''
-协程(Coroutine)又称微线程、纤程，协程不是进程或线程，其执行过程类似于 Python 函数调用，Python 的 asyncio 模块实现的异步IO编程框架中，协程是对使用 async 关键字定义的异步函数的调用;
+协程(Coroutine)又称微线程、纤程，协程不是进程或线程，其执行过程类似于 Python 函数调用，
+Python 的 asyncio 模块实现的异步IO编程框架中，协程是对使用 async 关键字定义的异步函数的调用;
 
-一个进程包含多个线程,类似于一个人体组织有多种细胞在工作，同样，一个程序可以包含多个协程。多个线程相对独立，线程的切换受系统控制。同样，多个协程也相对独立，但是其切换由程序自己控制。
+一个进程包含多个线程,类似于一个人体组织有多种细胞在工作，同样，一个程序可以包含多个协程。
+多个线程相对独立，线程的切换受系统控制。同样，多个协程也相对独立，但是其切换由程序自己控制。
 '''
 
 import asyncio
@@ -20,7 +22,8 @@ async def display(num):
 d = display('d')  # 通过async得到协程对象
 print(d)
 '''
-event_loop: 事件循环,相当于一个无限循环,可以把一些函数添加到这个事件中,函数不会立即执行, 而是满足某些条件的时候,函数就会被循环执行;
+event_loop: 事件循环,相当于一个无限循环,可以把一些函数添加到这个事件中,
+函数不会立即执行, 而是满足某些条件的时候,函数就会被循环执行;
 '''
 loop = asyncio.get_event_loop()  # 创建事件循环
 loop.run_until_complete(d)  # 把协程对象丢给循环,并执行异步函数内部代码
@@ -33,12 +36,13 @@ import asyncio
 def running1():
     async def test1():
         print('1')
-        await test2()
+        print(await test2())
         print('2')
 
     async def test2():
         print('3')
         print('4')
+        return 5
 
     loop = asyncio.get_event_loop()
     loop.run_until_complete(test1())
@@ -59,7 +63,7 @@ print(task)
 loop.run_until_complete(task)  # 执行任务
 
 '''
-future: 代表以后执行或者没有执行的任务,实际上和task没有本质区别;这里就不做代码展示;
+future: 代表以后执行或者没有执行的任务,实际上和task没有本质区别,这里就不做代码展示;
 首先使用一般方式方法创建一个函数:
 '''
 
@@ -79,7 +83,8 @@ print(future_task, '执行完了')
 
 '''
 await关键字的使用
-在异步函数中，可以使用await关键字，针对耗时的操作(例如网络请求、文件读取等IO操作)进行挂起，比如异步程序执行到某一步时需要很长时间的等待，就将此挂起，去执行其他异步函数
+在异步函数中，可以使用await关键字，针对耗时的操作(例如网络请求、文件读取等IO操作)进行挂起，
+比如异步程序执行到某一步时需要很长时间的等待，就将此挂起，去执行其他异步函数
 '''
 
 
@@ -91,8 +96,10 @@ async def do_some_work(n):  # 使用async关键字定义异步函数
 
 start_time = time.time()  # 开始时间
 coro = do_some_work(2)
+print(coro)
 loop = asyncio.get_event_loop()  # 创建事件循环对象
-loop.run_until_complete(coro)
+res = loop.run_until_complete(coro)
+print(res)
 print('运行时间: ', time.time() - start_time)
 
 '''
@@ -114,7 +121,7 @@ tasks = [asyncio.ensure_future(do_some_work(1, 2)),
          asyncio.ensure_future(do_some_work(2, 1)),
          asyncio.ensure_future(do_some_work(3, 3))]  # 构建三个task任务
 loop = asyncio.get_event_loop()
-loop.run_until_complete(asyncio.wait(tasks))  # 同时注册多个任务列表
+loop.run_until_complete(asyncio.wait(tasks))  # 同时注册多个任务列表 ,碰到await和io操作等等，就会自动切换到其他协程任务执行
 for task in tasks:
     print('任务执行结果: ', task.result())
 print('运行时间: ', time.time() - start_time)
