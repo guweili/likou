@@ -173,4 +173,3 @@ if __name__ == '__main__':
     find = tree.breadth_find(3)
     find2 = tree.depth_find(3, tree.root)
     res = tree.isValidBST(tree.root)
-    pass

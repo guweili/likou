@@ -189,16 +189,16 @@ print('主')
 
 '''
 django 自带中间件
-认证支持中间件
-中间件类: django.contrib.auth.middleware.AuthenticationMiddleware .
-会话支持中间件
-Middleware class: django.contrib.sessions.middleware.SessionMiddleware .
-压缩中间件
-中间件类 django.middleware.gzip.GZipMiddleware .
-反向代理支持 (X-Forwarded-For中间件)
-Middleware class: django.middleware.http.SetRemoteAddrFromForwardedFor .
-跨域中间件
-中间件类: django.middleware.csrf.CsrfViewMiddleware
+class  SecurityMiddleware -->为请求/响应循环提供了几种安全改进
+class  SessionMiddleware -->开启会话支持
+class  CommonMiddleware -->基于APPEND_SLASH和PREPEND_WWW的设置来重写URL
+       如果APPEND_SLASH设为True，并且初始URL 没有以斜线结尾以及在URLconf 中没找到对应定义，这时形成一个斜线结尾的新URL
+       如果PREPEND_WWW设为True，前面缺少 "www."的url将会被重定向到相同但是以一个"www."开头的url
+ 
+class  CsrfViewMiddleware -->添加跨站点请求伪造的保护，通过向POST表单添加一个隐藏的表单字段，并检查请求中是否有正确的值
+class  AuthenticationMiddleware -->向每个接收到的user对象添加HttpRequest属性，表示当前登录的用户
+class  MessageMiddleware -->开启基于Cookie和会话的消息支持
+class  XFrameOptionsMiddleware -->对点击劫持的保护
 '''
 ```
 
@@ -226,7 +226,7 @@ sys.getrefcount(a)3复制代码这个例子中，a 的引用计数是 3，因
 gil 内部机制
 while True:
     acquire GIL
-    for i in 1000:
+    for i in 1000:  
         do something
     release GIL
     /* Give Operating System a chance to do thread scheduling */
@@ -251,11 +251,10 @@ while True:
 ```python
 '''
 一、悲观锁
-
 顾名思义，就是对于数据的处理持悲观态度，总认为会发生并发冲突，获取和修改数据时，别人会修改数据。所以在整个数据处理过程中，需要将数据锁定。
 悲观锁的实现，通常依靠数据库提供的锁机制实现，比如mysql的排他锁，select .... for update来实现悲观锁。
 将商品库存数量nums字段类型设为unsigned，保证在数据库层面不会发生负数的情况。
-悲观锁在并发控制上采取的是先上锁然后再处理数据的保守策略，虽然保证了数据处理的安全性，但也降低了效率。。
+悲观锁在并发控制上采取的是先上锁然后再处理数据的保守策略，虽然保证了数据处理的安全性，但也降低了效率。
 '''
 
 '''
@@ -283,6 +282,7 @@ B+Tree 特点：
 直到叶子节点。
 3、B+Tree 的每个叶子节点增加了一个指向相邻叶子节点的指针，它的最后一个数
 据会指向下一个叶子节点的第一个数据，形成了一个有序链表的结构。]()
+
 '''
 
 
@@ -311,7 +311,7 @@ B+Tree 特点：
 通过lock进行资源上锁，达到资源依次获取的目的
 
 什么gil
-gil线程全局锁
+gil线程全局锁2
 
 为什么gil会存在：
 1. 设计者为了规避类似于内存管理这样的复杂的竞争风险问题
@@ -324,7 +324,6 @@ gil线程全局锁
 
 第三，仍然使用多线程
 因为在 IO 密集型任务中，多线程的『鸡肋』影响不大
-
 
 线程不能脱离进程单独存在，一个进程里至少有一个线程
 一个进程里的多个线程，可以共享全局变量，通信也比较简单，而多进程不行，需要借助 multiprocessing.Value 将其传入各个子进程进行共享

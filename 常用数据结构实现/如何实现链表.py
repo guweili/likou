@@ -125,4 +125,3 @@ if __name__ == '__main__':
     head = [4, 5, 1, 9]
     link = LinkNode()  # 构建链表对象
     link.batch_add(head)
-    pass
