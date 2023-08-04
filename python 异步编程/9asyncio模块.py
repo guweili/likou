@@ -28,9 +28,8 @@ event_loop: 事件循环,相当于一个无限循环,可以把一些函数添加
 loop = asyncio.get_event_loop()  # 创建事件循环
 loop.run_until_complete(d)  # 把协程对象丢给循环,并执行异步函数内部代码
 
-# await: 用来挂起阻塞方法的执行;
 
-import asyncio
+# await: 用来挂起阻塞方法的执行;
 
 
 def running1():

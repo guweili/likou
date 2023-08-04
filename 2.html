@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+1111
+</body>
+<script type="text/javascript">
+    // 2、写一个js函数，实现对一个数字每3位加一个逗号，如输入100000， 输出100,000（不考虑负数，小数）
+
+    function f(value) {
+        console.log(11111)
+        let str = value.toString()
+        for (let i = 0; i < str.length; i + 3) {
+            str = str.slice(0, i) + ',' + str.slice(i)
+        }
+        return str
+    }
+
+    let res = f(100000)
+    console.log(res)
+</script>
+</html>
